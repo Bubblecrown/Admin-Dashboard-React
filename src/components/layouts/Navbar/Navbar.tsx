@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -70,14 +71,26 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+const NavBarLink = React.forwardRef<any, any>((props, ref) => (
+  <NavLink
+    ref={ref}
+    to={props.to}
+    className={({ isActive }) =>
+      `${props.className} ${isActive ? props.active : ""}`
+    }
+  >
+    {props.children}
+  </NavLink>
+));
+
 type NavbarProps = {
   // ? ส่งค่า prop นี้มาหรือไม่ส่งมาก็ได้ เพราะปกติต้อง required
   open: boolean
   // void คือไม่มีการ return อะไร
-  setDrawerClose:()=>void
+  setDrawerClose: () => void
 }
 
-export default function Navbar({open, setDrawerClose}:NavbarProps) {
+export default function Navbar({ open, setDrawerClose }: NavbarProps) {
   const theme = useTheme();
 
   const handleDrawerClose = () => {
@@ -87,49 +100,66 @@ export default function Navbar({open, setDrawerClose}:NavbarProps) {
 
   return (
     <Drawer
-        sx={{
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
           width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+          boxSizing: 'border-box',
+        },
+      }}
+      variant="persistent"
+      anchor="left"
+      open={open}
+    >
+      <DrawerHeader>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
+      <List>
+        {/* ใช้เป้น component = NavLink จะได้ไม่เสีย style */}
+        <ListItem 
+        button 
+        disablePadding 
+        to="/products"
+        component={NavBarLink} 
+        active = "Mui-selected"
+        exact>
+          <ListItemButton>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Products" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <List>
+        <ListItem button disablePadding to="/reports" component={NavBarLink} 
+        active = "Mui-selected"
+        exact>
+          <ListItemButton>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reports" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <List>
+        <ListItem button disablePadding to="/profile" component={NavBarLink} 
+        active = "Mui-selected"
+        exact>
+          <ListItemButton>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <Divider />
+    </Drawer>
   );
 }

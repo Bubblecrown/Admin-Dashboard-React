@@ -23,6 +23,11 @@ import Navbar from './components/layouts/Navbar';
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
+import ProductPage from './components/pages/ProductPage';
+import ReportPage from './components/pages/ReportPage';
+import CreatePage from './components/pages/CreatePage';
+import EditPage from './components/pages/EditPage';
+import ProfilePage from './components/pages/ProfilePage';
 
 const drawerWidth = 240;
 
@@ -77,7 +82,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function App() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -98,6 +103,11 @@ export default function App() {
         <Routes>
         <Route path='/login' element={<LoginPage />}/>
         <Route path='/register' element={<RegisterPage />}/>
+        <Route path='/products' element={<ProductPage />}/>
+        <Route path='/reports' element={<ReportPage />}/>
+        <Route path='/products/create' element={<CreatePage />}/>
+        <Route path='/product/edit/:id' element={<EditPage />}/>
+        <Route path='/profile' element={<ProfilePage />}/>
         <Route path='/' element={<Navigate to={"/login"}/>}/>
         <Route path='*' element={<PageNotFound />}/>
       </Routes>
