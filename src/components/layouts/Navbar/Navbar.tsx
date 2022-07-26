@@ -4,20 +4,25 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+
+// Icon
 import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import EqualizerIcon from '@mui/icons-material/Equalizer';
+import PersonIcon from '@mui/icons-material/Person';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+// end Icon
+
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -114,10 +119,23 @@ export default function Navbar({ open, setDrawerClose }: NavbarProps) {
     >
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          <MenuIcon />
         </IconButton>
       </DrawerHeader>
       <Divider />
+      <List>
+        <ListItem button disablePadding to="/reports" component={NavBarLink} 
+        active = "Mui-selected"
+        exact>
+          <ListItemButton>
+            <ListItemIcon>
+              <EqualizerIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+
       <List>
         {/* ใช้เป้น component = NavLink จะได้ไม่เสีย style */}
         <ListItem 
@@ -129,33 +147,22 @@ export default function Navbar({ open, setDrawerClose }: NavbarProps) {
         exact>
           <ListItemButton>
             <ListItemIcon>
-              <InboxIcon />
+              <ShoppingBagIcon />
             </ListItemIcon>
             <ListItemText primary="Products" />
           </ListItemButton>
         </ListItem>
       </List>
-      <List>
-        <ListItem button disablePadding to="/reports" component={NavBarLink} 
-        active = "Mui-selected"
-        exact>
-          <ListItemButton>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-          </ListItemButton>
-        </ListItem>
-      </List>
+      
       <List>
         <ListItem button disablePadding to="/profile" component={NavBarLink} 
         active = "Mui-selected"
         exact>
           <ListItemButton>
             <ListItemIcon>
-              <InboxIcon />
+              <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary="Profile" />
+            <ListItemText primary="Account" />
           </ListItemButton>
         </ListItem>
       </List>
