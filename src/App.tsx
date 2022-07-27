@@ -84,6 +84,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+// edit theme
 const editTheme = createTheme({
   components: {
     MuiDrawer: {
@@ -94,9 +95,13 @@ const editTheme = createTheme({
       },
     },
   },
-
+  typography:{
+    fontFamily:'Josefin Sans'
+  },
   palette: {
-
+    // primary: {
+    //   main: '#8544E0'
+    // },
     background: {
       default: "#FBFBFC",
     },
@@ -106,6 +111,7 @@ const editTheme = createTheme({
 export default function App() {
   const [open, setOpen] = React.useState(true);
 
+  // Drawer open-close
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -140,6 +146,7 @@ export default function App() {
   );
 }
 
+// page not found
 const PageNotFound=()=>(
   <div>
     <h1>404 Not found</h1>

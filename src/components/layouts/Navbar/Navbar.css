@@ -1,3 +1,7 @@
 .css-1k455el > .css-1d9cypr-MuiStack-root{
     align-items: flex-start;
 }
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
+    margin-top:12px
+}
