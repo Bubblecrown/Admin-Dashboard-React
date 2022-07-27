@@ -9,6 +9,10 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 
+// style
+import './Navbar.css'
+// end style
+
 // Icon
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -24,6 +28,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { NavLink } from 'react-router-dom';
+import { Stack } from '@mui/material';
+import { height } from '@mui/system';
 
 const drawerWidth = 240;
 
@@ -118,9 +124,18 @@ export default function Navbar({ open, setDrawerClose }: NavbarProps) {
       open={open}
     >
       <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
+        <Stack direction="row" alignItems="center" >
+          <Stack sx={{py:4, pr:1}}>
+          <img
+          // To reference assets in the public folder, you need to use an environment variable called PUBLIC_URL
+            src={`${process.env.PUBLIC_URL}/images/logo.png`}
+            style={{height:80}} />
+          </Stack>
+          <IconButton onClick={handleDrawerClose}>
           <MenuIcon />
         </IconButton>
+        </Stack>
+        
       </DrawerHeader>
       <Divider />
       <List>

@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+// style
+import "./App.css"
+// end style
+import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,6 +32,7 @@ import CreatePage from './components/pages/CreatePage';
 import EditPage from './components/pages/EditPage';
 import ProfilePage from './components/pages/ProfilePage';
 
+
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
@@ -37,7 +41,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   flexGrow: 1,
   padding: theme.spacing(3),
   transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.sharp,
+  easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   marginLeft: `-${drawerWidth}px`,
@@ -80,8 +84,26 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+const editTheme = createTheme({
+  components: {
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          
+        },
+      },
+    },
+  },
+
+  palette: {
+
+    background: {
+      default: "#FBFBFC",
+    },
+  },
+});
+
 export default function App() {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -93,26 +115,28 @@ export default function App() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      {/* ส่ง function ไปเป็น prop */}
-      <Header open={open} setDrawerOpen={handleDrawerOpen}/>
-      <Navbar open={open} setDrawerClose={handleDrawerClose}/>
-      <Main open={open}>
-        <DrawerHeader />
-        <Routes>
-        <Route path='/login' element={<LoginPage />}/>
-        <Route path='/register' element={<RegisterPage />}/>
-        <Route path='/products' element={<ProductPage />}/>
-        <Route path='/reports' element={<ReportPage />}/>
-        <Route path='/products/create' element={<CreatePage />}/>
-        <Route path='/product/edit/:id' element={<EditPage />}/>
-        <Route path='/profile' element={<ProfilePage />}/>
-        <Route path='/' element={<Navigate to={"/login"}/>}/>
-        <Route path='*' element={<PageNotFound />}/>
-      </Routes>
-      </Main>
-    </Box>
+    <ThemeProvider theme={editTheme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        {/* ส่ง function ไปเป็น prop */}
+        <Header open={open} setDrawerOpen={handleDrawerOpen}/>
+        <Navbar open={open} setDrawerClose={handleDrawerClose}/>
+        <Main open={open}>
+          <DrawerHeader />
+          <Routes>
+          <Route path='/login' element={<LoginPage />}/>
+          <Route path='/register' element={<RegisterPage />}/>
+          <Route path='/products' element={<ProductPage />}/>
+          <Route path='/reports' element={<ReportPage />}/>
+          <Route path='/products/create' element={<CreatePage />}/>
+          <Route path='/product/edit/:id' element={<EditPage />}/>
+          <Route path='/profile' element={<ProfilePage />}/>
+          <Route path='/' element={<Navigate to={"/login"}/>}/>
+          <Route path='*' element={<PageNotFound />}/>
+        </Routes>
+        </Main>
+      </Box>
+    </ThemeProvider>
   );
 }
 

@@ -3,6 +3,10 @@
     display: initial;
 }}
 .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-hyum1k-MuiToolbar-root{
-    background-color: #fff;
-    color: #000
+    background-color: #FBFBFC;
+    color: #000;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionFixed.mui-fixed.css-jzk4qw-MuiPaper-root-MuiAppBar-root{
+    box-shadow: none;
 }

@@ -16,19 +16,19 @@ import "./Header.css"
 // Icon
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PersonAdd from '@mui/icons-material/PersonAdd';
+import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 // end Icon
 
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+
 import { Avatar, Badge, Menu, MenuItem, Tooltip } from '@mui/material';
 
 const drawerWidth = 240;
@@ -125,12 +125,12 @@ export default function Header({open, setDrawerOpen}:HeaderProps) {
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
           <IconButton size="large" aria-label="show 4 new mails" color="inherit">
             <Badge badgeContent={4} color="error">
-              <MailIcon />
+              <MailOutlineOutlinedIcon />
             </Badge>
           </IconButton>
           <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
             <Badge badgeContent={17} color="error">
-              <NotificationsIcon />
+              <NotificationsOutlinedIcon />
             </Badge>
           </IconButton>
           <IconButton
@@ -151,7 +151,7 @@ export default function Header({open, setDrawerOpen}:HeaderProps) {
             aria-haspopup="true"
             aria-expanded={openA ? 'true' : undefined}
           >
-            <AccountCircleIcon />
+            <AccountCircleOutlinedIcon />
           </IconButton>
         </Tooltip>
       </Box>
