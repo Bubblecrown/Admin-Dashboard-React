@@ -99,9 +99,9 @@ const editTheme = createTheme({
     fontFamily:'Josefin Sans'
   },
   palette: {
-    // primary: {
-    //   main: '#8544E0'
-    // },
+    primary: {
+      main: '#8544E0'
+    },
     background: {
       default: "#FBFBFC",
     },
