@@ -1,9 +1,7 @@
-import { FormLabel } from "@mui/material";
 import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { json } from "stream/consumers";
-
+import { Formik, FormikProps } from "formik";
 type RegisterPageProps = {
   //
 };
@@ -11,13 +9,12 @@ type RegisterPageProps = {
 const RegisterPage: React.FC<any> = () => {
   const navGate = useNavigate();
   const [account, setAccount] = useState({ username: "", password: "" });
-  return (
-    <div>
+  const regisForm = (props: FormikProps<any>) => {
+    return (
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert(JSON.stringify(account));
-        }}
+        onSubmit={
+          props.handleSubmit
+        }
       >
         <label>Username:</label>
         <br />
@@ -25,14 +22,9 @@ const RegisterPage: React.FC<any> = () => {
           type="text"
           id="username"
           name="username"
-          onChange={(e) => {
-            console.log(e.target.value);
-            setAccount({
-              // เอาข้อมูลทั้งหมดมาก่อน แล้วค่อยบอกว่าเราต้องการจะแก้ตัวไหน
-              ...account,
-              username: e.target.value,
-            });
-          }}
+          onChange={props.handleChange}
+          // value update initial value
+          value={props.values.username}
         />
         <br />
         <label>Password:</label>
@@ -42,17 +34,26 @@ const RegisterPage: React.FC<any> = () => {
           id="password"
           name="psw"
           // ดัก event ที่เกิดขึ้น -- value of input
-          onChange={(e) => {
-            console.log(e.target.value);
-            setAccount({ 
-              ...account, 
-              password: e.target.value });
-          }}
+          onChange={props.handleChange}
+          // value update initial value
+          value={props.values.password}
         />
         <br />
         <br />
         <input type="submit" value="Submit" />
       </form>
+    );
+  };
+  return (
+    <div>
+      <Formik
+        onSubmit={(value, { setSubmitting }) => {
+          alert(JSON.stringify(value));
+        }}
+        initialValues={{ username: "", password: "" }}
+      >
+        {(props) => regisForm(props)}
+      </Formik>
       <button
         onClick={() => {
           // กลับไปหน้าก่อนหน้า
@@ -61,9 +62,6 @@ const RegisterPage: React.FC<any> = () => {
       >
         Back to login
       </button>
-      <br />
-      <span>debug: {JSON.stringify(account)}</span>
-      <br />
     </div>
   );
 };
