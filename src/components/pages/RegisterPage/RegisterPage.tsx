@@ -2,14 +2,35 @@ import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, FormikProps } from "formik";
-import { Box, Button, Card, CardContent, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Link,
+  ListItem,
+  Stack,
+  SxProps,
+  TextField,
+  Theme,
+  Typography,
+} from "@mui/material";
+// icon
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+// end icon
+
 type RegisterPageProps = {
   //
 };
 
 const RegisterPage: React.FC<any> = () => {
   const navGate = useNavigate();
-  const [account, setAccount] = useState({ username: "", password: "" });
+  const style: SxProps<Theme> | any = {
+    container: { minWidth: 120, maxWidth: 400, display: "block" },
+    inline: { display: "flex", direction: "row", gap: 1 },
+    // arrowBtn: { fontWeight: "bold", fontSize: 10, boxShadow:"none" },
+  };
   // const regisForm = (props: FormikProps<any>) => {
   //   return (
   //     <form onSubmit={props.handleSubmit}>
@@ -82,10 +103,10 @@ const RegisterPage: React.FC<any> = () => {
           color="primary"
           fullWidth
         >
-          Register
+          Sign up
         </Button>
         <Button
-        sx={{mt:1}}
+          sx={{ mt: 1 }}
           fullWidth
           variant="outlined"
           onClick={() => {
@@ -100,26 +121,47 @@ const RegisterPage: React.FC<any> = () => {
   };
   return (
     <div>
-      <Box>
-        <Card sx={{ minWidth: 175, maxWidth: 300 }}>
-          <CardContent>
-            <Typography sx={{ fontSize: 32 }}>Register</Typography>
-            <Formik
-              onSubmit={(value, { setSubmitting }) => {
-                alert(JSON.stringify(value));
-                setTimeout(() => {
-                  // หลังจาก 2 วิ ค่อยให้เป็น false
-                  // false = ไม่ disable = ไม่ห้ามกด
-                  setSubmitting(false);
-                }, 2000);
+      <Container maxWidth="sm">
+        <Stack sx={style.container}>
+          {/* <Button
+            sx={style.arrowBtn}
+            startIcon={<KeyboardBackspaceIcon />}
+            onClick={() => {
+              // กลับไปหน้าก่อนหน้า
+              navGate(-1);
+            }}
+          >
+            Back
+          </Button> */}
+          <Typography sx={{ fontSize: 32 }}>Create an account</Typography>
+          <Box sx={style.inline}>
+            <Typography variant="subtitle1">Already have an account?</Typography>
+            <Link
+              variant="subtitle1"
+              onClick={() => {
+                navGate(-1);
               }}
-              initialValues={{ username: "", password: "" }}
+              underline="hover"
+              sx={{ cursor: "pointer" }}
             >
-              {(props) => regisForm(props)}
-            </Formik>
-          </CardContent>
-        </Card>
-      </Box>
+              Log in
+            </Link>
+          </Box>
+          <Formik
+            onSubmit={(value, { setSubmitting }) => {
+              alert(JSON.stringify(value));
+              setTimeout(() => {
+                // หลังจาก 2 วิ ค่อยให้เป็น false
+                // false = ไม่ disable = ไม่ห้ามกด
+                setSubmitting(false);
+              }, 2000);
+            }}
+            initialValues={{ username: "", password: "" }}
+          >
+            {(props) => regisForm(props)}
+          </Formik>
+        </Stack>
+      </Container>
     </div>
   );
 };
