@@ -27,10 +27,11 @@ const RegisterPage: React.FC<any> = () => {
           name="username"
           onChange={(e) => {
             console.log(e.target.value);
-            // รับค่าในลักษณะ object
-            // ต้องใส่ password ให้ครบ แต่เราไม่ได้มีการป้อนค่าตรงนี้ เลยใช้เป็นค่าของ state ก่อนหน้า account.password
-            // วิธีนี้ถ้ามี field สัก 20 field มันจะไม่ตอบโจทย์เพราะต้องมา เอาแต่ set ค่าก่อนหน้า
-            setAccount({ username: e.target.value, password: account.password });
+            setAccount({
+              // เอาข้อมูลทั้งหมดมาก่อน แล้วค่อยบอกว่าเราต้องการจะแก้ตัวไหน
+              ...account,
+              username: e.target.value,
+            });
           }}
         />
         <br />
@@ -43,7 +44,9 @@ const RegisterPage: React.FC<any> = () => {
           // ดัก event ที่เกิดขึ้น -- value of input
           onChange={(e) => {
             console.log(e.target.value);
-            setAccount({ username: account.username, password: e.target.value });
+            setAccount({ 
+              ...account, 
+              password: e.target.value });
           }}
         />
         <br />
