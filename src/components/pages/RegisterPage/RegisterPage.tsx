@@ -16,13 +16,28 @@ const RegisterPage: React.FC<any> = () => {
           alert("Submitted");
         }}
       >
-        <label>First name:</label>
+        <label>Username:</label>
         <br />
-        <input type="text" id="fname" name="fname" value="John" />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
+        />
         <br />
-        <label>Last name:</label>
+        <label>Password:</label>
         <br />
-        <input type="text" id="lname" name="lname" value="Doe" />
+        <input
+          type="text"
+          id="password"
+          name="psw"
+          // ดัก event ที่เกิดขึ้น -- value of input
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
+        />
         <br />
         <br />
         <input type="submit" value="Submit" />
