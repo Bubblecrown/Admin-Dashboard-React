@@ -4,24 +4,17 @@
   }
 }
 
-button {
-  box-shadow: none !important;
-}
-
 .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-hyum1k-MuiToolbar-root,
 .css-av538e-MuiButtonBase-root-MuiIconButton-root {
   background-color: #fbfbfc;
   color: #000;
 }
 
-.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionFixed.mui-fixed.css-jzk4qw-MuiPaper-root-MuiAppBar-root {
-  box-shadow: none !important;
-}
-
+button,
+.css-ciy9n4-MuiPaper-root-MuiAppBar-root,
+.css-jzk4qw-MuiPaper-root-MuiAppBar-root,
+.css-1dls5sz-MuiPaper-root-MuiAppBar-root,
 .css-1nkowpy-MuiPaper-root-MuiAppBar-root {
-  box-shadow: none !important;
-}
-.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionFixed.mui-fixed.css-ciy9n4-MuiPaper-root-MuiAppBar-root {
   box-shadow: none !important;
 }
 

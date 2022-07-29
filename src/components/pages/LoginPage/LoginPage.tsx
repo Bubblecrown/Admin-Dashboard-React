@@ -2,6 +2,7 @@ import { Box, Button, Container, Link, Stack, SxProps, TextField, Theme, Typogra
 import { Formik, FormikProps } from "formik";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { Account } from "../../../types/account.type";
 
 type LoginPageProps = {
   //
@@ -14,7 +15,7 @@ const LoginPage: React.FC<any> = () => {
     inline: { display: "flex", direction: "row", gap: 1, mt:1, mb:1 },
   };
 
-  const regisForm = (props: FormikProps<any>) => {
+  const loginForm = (props: FormikProps<Account>) => {
     return (
       <form onSubmit={props.handleSubmit}>
         <TextField
@@ -54,7 +55,7 @@ const LoginPage: React.FC<any> = () => {
           color="primary"
           fullWidth
         >
-          Sign up
+          Log in
         </Button>
         <Box sx={style.inline}>
           <Typography variant="subtitle1">Don't have an account?</Typography>
@@ -66,13 +67,14 @@ const LoginPage: React.FC<any> = () => {
             underline="hover"
             sx={{ cursor: "pointer" }}
           >
-            Sing up
+            Sign up
           </Link>
         </Box>
 
       </form>
     );
   };
+  const initialUser: Account = {username: "", password: ""}
   return (
     <div>
       <Container maxWidth="sm">
@@ -84,13 +86,13 @@ const LoginPage: React.FC<any> = () => {
               alert(JSON.stringify(value));
               setTimeout(() => {
                 // หลังจาก 2 วิ ค่อยให้เป็น false
-                // false = ไม่ disable = ไม่ห้ามกด
+                // false = ไม่ disable = ไม่ห้ามกด = กดได้
                 setSubmitting(false);
               }, 2000);
             }}
-            initialValues={{ username: "", password: "" }}
+            initialValues={initialUser}
           >
-            {(props) => regisForm(props)}
+            {(props) => loginForm(props)}
           </Formik>
         </Stack>
       </Container>
