@@ -22,6 +22,11 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 // end icon
 import { Account } from "../../../types/account.type";
 
+// Backend
+import Axios from 'axios'
+import axios from "axios";
+// end Backend
+
 type RegisterPageProps = {
   //
 };
@@ -158,12 +163,15 @@ const RegisterPage: React.FC<any> = () => {
               </Box>
               <Formik
                 onSubmit={(value, { setSubmitting }) => {
-                  alert(JSON.stringify(value));
+                  axios.post('http://localhost:8085/api/v2/authen/register', value).then(result=>{
+                    alert(JSON.stringify(value));
                   setTimeout(() => {
                     // หลังจาก 2 วิ ค่อยให้เป็น false
                     // false = ไม่ disable = ไม่ห้ามกด
                     setSubmitting(false);
                   }, 2000);
+                  })
+                  
                 }}
                 initialValues={initialUser}
               >

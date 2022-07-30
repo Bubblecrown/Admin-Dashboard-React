@@ -2,11 +2,11 @@
 GET http://localhost:8085/api/v2/stock/product HTTP/1.1
 
 
-### Get product by Id
+### (Query) Get product by Id
 GET http://localhost:8085/api/v2/stock/product/7 HTTP/1.1
 
 
-### Get product by keyword
+### (Search) Get product by keyword
 GET http://localhost:8085/api/v2/stock/product/keyword/Arduino Nano HTTP/1.1
 
 
@@ -41,7 +41,7 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="id";
 
-39
+58
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="name";
 
