@@ -162,17 +162,18 @@ const RegisterPage: React.FC<any> = () => {
                 </Link>
               </Box>
               <Formik
-                onSubmit={(value, { setSubmitting }) => {
+                onSubmit={async (value, { setSubmitting }) => {
                   // ไม่ต้องรอให้โค้ดชุดนี้เสร็จ ไปทำอย่างอื่นก่อนได้
-                  axios.post("http://localhost:8085/api/v2/authen/register", value).then((result) => {
-                    // then ได้ผลลัพธ์ แล้วค่อยทำ code ข้างในนี้
-                    alert(JSON.stringify(result.data));
-                    setTimeout(() => {
-                      // หลังจาก 2 วิ ค่อยให้เป็น false
-                      // false = ไม่ disable = ไม่ห้ามกด
-                      setSubmitting(false);
-                    }, 2000);
-                  });
+                  // await ให้หยุดรอ จนกว่าโค้ดชุดนี้จะรันเสร็จ ห้ามวิ่งไปที่บรรทัดถัดไป
+                  const result = await axios.post("http://localhost:8085/api/v2/authen/register", value);
+                  // then ได้ผลลัพธ์ แล้วค่อยทำ code ข้างในนี้
+                  // แต่ถ้าใช้ then จะเกิด hell call back 
+                  alert(JSON.stringify(result.data));
+                  setTimeout(() => {
+                    // หลังจาก 2 วิ ค่อยให้เป็น false
+                    // false = ไม่ disable = ไม่ห้ามกด
+                    setSubmitting(false);
+                  }, 2000);
                 }}
                 initialValues={initialUser}
               >
