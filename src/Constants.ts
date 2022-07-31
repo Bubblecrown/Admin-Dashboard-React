@@ -1,3 +1,5 @@
+// 1
+
 // Register page
 export const REGISTER_FETCHING = 'REGISTER_FETCHING'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
