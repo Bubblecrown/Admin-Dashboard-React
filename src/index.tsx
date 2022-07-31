@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
+// 5. create store 
 // redux
 import { legacy_createStore as createStore, applyMiddleware, Middleware } from "redux";
 import thunk from "redux-thunk";

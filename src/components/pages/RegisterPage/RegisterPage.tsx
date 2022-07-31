@@ -1,16 +1,12 @@
 import * as React from "react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, FormikProps } from "formik";
 import {
   Box,
   Button,
-  Card,
-  CardContent,
   Container,
   Grid,
   Link,
-  ListItem,
   Stack,
   SxProps,
   TextField,
@@ -23,17 +19,21 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Account } from "../../../types/account.type";
 
 // Backend
-import Axios from "axios";
-import axios from "axios";
-import { httpClient } from "../../../utills/httpclient";
-import { server } from "../../../Constants";
 // end Backend
+
+// actions
+import * as registerAction from "../../../actions/register.action";
+import { useDispatch, useSelector } from "react-redux";
+import { RootReducer } from "../../../reducers";
+// end actions
 
 type RegisterPageProps = {
   //
 };
-
+// 6.
 const RegisterPage: React.FC<any> = () => {
+  const registerReducer = useSelector((state: RootReducer) => state.registerReducer);
+  const dispatch:any = useDispatch();
   const navGate = useNavigate();
   const style: SxProps<Theme> | any = {
     container: { minWidth: 120, maxWidth: 400, display: "block" },
@@ -165,18 +165,7 @@ const RegisterPage: React.FC<any> = () => {
               </Box>
               <Formik
                 onSubmit={async (value, { setSubmitting }) => {
-                  
-                  // ไม่ต้องรอให้โค้ดชุดนี้เสร็จ ไปทำอย่างอื่นก่อนได้
-                  // await ให้หยุดรอ จนกว่าโค้ดชุดนี้จะรันเสร็จ ห้ามวิ่งไปที่บรรทัดถัดไป
-                  const result = await httpClient.post(server.REGISTER_URL, value)
-                  // then ได้ผลลัพธ์ แล้วค่อยทำ code ข้างในนี้
-                  // แต่ถ้าใช้ then จะเกิด hell call back 
-                  alert(JSON.stringify(result.data));
-                  setTimeout(() => {
-                    // หลังจาก 2 วิ ค่อยให้เป็น false
-                    // false = ไม่ disable = ไม่ห้ามกด
-                    setSubmitting(false);
-                  }, 2000);
+                  dispatch(registerAction.register(value));
                 }}
                 initialValues={initialUser}
               >

@@ -143,9 +143,7 @@ export default function Header({ open, setDrawerOpen }: HeaderProps) {
                 aria-expanded={openA ? "true" : undefined}
               >
                 <Tooltip title="Account settings">
-                  <IconButton sx={{ p: 0 }}>
-                    <AccountCircleOutlinedIcon />
-                  </IconButton>
+                  <AccountCircleOutlinedIcon />
                 </Tooltip>
               </Box>
               {/* drawer menu header */}

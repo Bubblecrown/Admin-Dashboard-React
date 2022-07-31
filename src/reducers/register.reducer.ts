@@ -17,11 +17,10 @@ export default (state = initialState, { type, payload }: any): registerState => 
   switch (type) {
     case REGISTER_FETCHING:
       return { ...state, isFetching: true, isError: false, result: null };
-    case REGISTER_FAILED:
-      return { ...state, isFetching: false, isError: true, result: null };
     case REGISTER_SUCCESS:
       return { ...state, isFetching: false, isError: false, result: payload };
-
+    case REGISTER_FAILED:
+      return { ...state, isFetching: false, isError: true, result: null };
     default:
       return state;
   }
