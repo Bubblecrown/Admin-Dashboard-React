@@ -1,23 +1,33 @@
-import { Box, Button, Container, Link, Stack, SxProps, TextField, Theme, Typography } from "@mui/material";
+import { Alert, Box, Button, Container, Link, Stack, SxProps, TextField, Theme, Typography } from "@mui/material";
 import { Formik, FormikProps } from "formik";
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { RootReducer } from "../../../reducers";
 import { Account } from "../../../types/account.type";
 
+// action
+import * as loginAction from "../../../actions/login.action";
+// end action
 type LoginPageProps = {
   //
 };
 
 const LoginPage: React.FC<any> = () => {
+  const loginReducer = useSelector((state: RootReducer) => state.loginReducer);
+  const dispatch: any = useDispatch();
   const navGate = useNavigate();
   const style: SxProps<Theme> | any = {
     container: { minWidth: 120, maxWidth: 400, display: "block" },
-    inline: { display: "flex", direction: "row", gap: 1, mt:1, mb:1 },
+    inline: { display: "flex", direction: "row", gap: 1, mt: 1, mb: 1 },
   };
 
   const loginForm = (props: FormikProps<Account>) => {
     return (
       <form onSubmit={props.handleSubmit}>
+        {loginReducer.isError && (
+          <Alert severity="error">The login failed. Maybe your username or password is invalid</Alert>
+        )}
         <TextField
           type="text"
           id="username"
@@ -45,13 +55,13 @@ const LoginPage: React.FC<any> = () => {
           value={props.values.password}
         />
         {/* disable double submit */}
-        
+
         <Button
-        sx={{mt:2}}
+          sx={{ mt: 2 }}
           type="submit"
           value="Submit"
           variant="contained"
-          disabled={props.isSubmitting}
+          disabled={loginReducer.isFetching}
           color="primary"
           fullWidth
         >
@@ -70,11 +80,10 @@ const LoginPage: React.FC<any> = () => {
             Sign up
           </Link>
         </Box>
-
       </form>
     );
   };
-  const initialUser: Account = {username: "", password: ""}
+  const initialUser: Account = { username: "", password: "" };
   return (
     <div>
       <Container maxWidth="sm">
@@ -82,13 +91,8 @@ const LoginPage: React.FC<any> = () => {
           <Typography sx={{ fontSize: 32 }}>Welcome back!</Typography>
           <Typography variant="subtitle1">Log in to your account to continue</Typography>
           <Formik
-            onSubmit={(value, { setSubmitting }) => {
-              alert(JSON.stringify(value));
-              setTimeout(() => {
-                // หลังจาก 2 วิ ค่อยให้เป็น false
-                // false = ไม่ disable = ไม่ห้ามกด = กดได้
-                setSubmitting(false);
-              }, 2000);
+            onSubmit={(value) => {
+              dispatch(loginAction.loginFunc(value, navGate));
             }}
             initialValues={initialUser}
           >
