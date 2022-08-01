@@ -31,6 +31,9 @@ import ReportPage from './components/pages/ReportPage';
 import CreatePage from './components/pages/CreatePage';
 import EditPage from './components/pages/EditPage';
 import ProfilePage from './components/pages/ProfilePage';
+import { useSelect } from '@mui/base';
+import { useSelector } from 'react-redux';
+import { RootReducer } from './reducers';
 
 
 const drawerWidth = 240;
@@ -110,7 +113,7 @@ const editTheme = createTheme({
 
 export default function App() {
   const [open, setOpen] = React.useState(true);
-
+  const loginReducer = useSelector((state:RootReducer) => state.loginReducer)
   // Drawer open-close
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -125,8 +128,8 @@ export default function App() {
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         {/* ส่ง function ไปเป็น prop */}
-        <Header open={open} setDrawerOpen={handleDrawerOpen}/>
-        <Navbar open={open} setDrawerClose={handleDrawerClose}/>
+        {loginReducer.result && <Header open={open} setDrawerOpen={handleDrawerOpen}/>}
+        {loginReducer.result && <Navbar open={open} setDrawerClose={handleDrawerClose}/>}
         <Main open={open}>
           <DrawerHeader />
           <Routes>
