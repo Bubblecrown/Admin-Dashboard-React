@@ -96,7 +96,7 @@ const RegisterPage: React.FC<any> = () => {
           type="submit"
           value="Submit"
           variant="contained"
-          disabled={props.isSubmitting}
+          disabled={registerReducer.isFetching}
           color="primary"
           fullWidth
         >
@@ -157,7 +157,7 @@ const RegisterPage: React.FC<any> = () => {
                 )}
               </Box>
               <Formik
-                onSubmit={async (value, { setSubmitting }) => {
+                onSubmit={async (value) => {
                   dispatch(registerAction.registerFunc(value, navGate));
                 }}
                 initialValues={initialUser}

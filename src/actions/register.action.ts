@@ -18,8 +18,9 @@ export const setFailedRegister = () => ({
   type: REGISTER_FAILED,
 });
 
-export const registerFunc = (account: Account, naviage:any) => {
+export const registerFunc = (account: Account, naviage: any) => {
   // hook ไม่สามารถใช้ได้นอก component เลยต้องทำการส่งมันเข้ามาจาก component แทน เพื่อให้สามารถใช้งานได้ในนี้
+  // ต้องใช้วิธีนี้แทน history.push เพราะ library bug
   return async (dispatch: any) => {
     try {
       // connecting
@@ -28,8 +29,10 @@ export const registerFunc = (account: Account, naviage:any) => {
 
       if (result.data.result === OK) {
         // success case
-        dispatch(setSuccessRegister(result.data));
-        naviage("/login")
+        setTimeout(() => {
+          dispatch(setSuccessRegister(result.data));
+          naviage("/login");
+        }, 2000);
       } else {
         dispatch(setFailedRegister());
       }
