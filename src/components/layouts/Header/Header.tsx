@@ -124,28 +124,28 @@ export default function Header({ open, setDrawerOpen }: HeaderProps) {
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
           <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-            <Badge badgeContent={4} color="error">
+            <Badge color="error">
               <MailOutlineOutlinedIcon />
             </Badge>
           </IconButton>
           <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
-            <Badge badgeContent={17} color="error">
+            <Badge color="error">
               <NotificationsOutlinedIcon />
             </Badge>
           </IconButton>
           <IconButton size="large" edge="end" aria-label="account of current user" aria-haspopup="true" color="inherit">
             <React.Fragment>
-              <Box
+              <Tooltip
+                title="Account settings"
                 onClick={handleClick}
                 aria-controls={openA ? "account-menu" : undefined}
                 color="inherit"
                 aria-haspopup="true"
                 aria-expanded={openA ? "true" : undefined}
               >
-                <Tooltip title="Account settings">
-                  <AccountCircleOutlinedIcon />
-                </Tooltip>
-              </Box>
+                <AccountCircleOutlinedIcon />
+              </Tooltip>
+
               {/* drawer menu header */}
               <Menu
                 anchorEl={anchorEl}
