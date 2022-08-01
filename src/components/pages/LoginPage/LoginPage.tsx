@@ -18,7 +18,7 @@ const LoginPage: React.FC<any> = () => {
   const dispatch: any = useDispatch();
   const navGate = useNavigate();
   const style: SxProps<Theme> | any = {
-    container: { minWidth: 120, maxWidth: 400, display: "block" },
+    container: {  display: "block" , pl:10, pr:10},
     inline: { display: "flex", direction: "row", gap: 1, mt: 1, mb: 1 },
   };
 

@@ -32,10 +32,11 @@ import CreatePage from './components/pages/CreatePage';
 import EditPage from './components/pages/EditPage';
 import ProfilePage from './components/pages/ProfilePage';
 import { useSelect } from '@mui/base';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootReducer } from './reducers';
 
-
+import * as loginAction from './actions/login.action'
+import { useEffect } from 'react';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
@@ -112,8 +113,10 @@ const editTheme = createTheme({
 });
 
 export default function App() {
+  
   const [open, setOpen] = React.useState(true);
-  const loginReducer = useSelector((state:RootReducer) => state.loginReducer)
+  const loginReducer = useSelector((state:RootReducer) => state.loginReducer);
+  const dispatch: any = useDispatch();
   // Drawer open-close
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -122,6 +125,12 @@ export default function App() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+// ดักเมื่อ component ถูกสร้าง
+  useEffect(() => {
+    dispatch(loginAction.restoreLogin())
+  }, [])
+  
 
   return (
     <ThemeProvider theme={editTheme}>

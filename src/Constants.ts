@@ -33,6 +33,7 @@ export const server = {
   TRANSACTION_URL: `transaction`,
   REPORT_URL: `stock/report`,
   LOGIN_PASSED: `yes`,
+
 };
 
 // Error Code
