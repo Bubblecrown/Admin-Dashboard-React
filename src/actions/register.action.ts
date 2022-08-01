@@ -2,6 +2,7 @@
 // ส่วนที่ component ทำการเรียก และส่งข้อมูลไปที่ reducer
 // เปรียบ reducer เหมือนสมอง หากเกิด stste แบบนี้มากระทบควรจะแสดงความรู้สึกออกไปยังไง
 
+import { history } from "../index";
 import { OK, REGISTER_FAILED, REGISTER_FETCHING, REGISTER_SUCCESS, server } from "../Constants";
 import { Account } from "../types/account.type";
 import { httpClient } from "../utills/httpclient";
@@ -27,6 +28,7 @@ export const register = (account: Account) => {
       if (result.data.result === OK) {
         // success case
         dispatch(setSuccessRegister(result.data));
+        history.push("/login")
       } else {
         dispatch(setFailedRegister());
       }

@@ -13,14 +13,18 @@ import { Provider, useDispatch } from "react-redux";
 import reducers from "./reducers";
 import logger from "redux-logger";
 // end redux
+import { createBrowserHistory } from "history";
 
 let middlewares: Middleware[] = [thunk];
 
 if (true || process.env.REACT_APP_IS_PRODUCTION != "1") {
   middlewares.push(logger);
 }
-
+// คล้ายกับ useNavigate
+export const history = createBrowserHistory();
 export const store = createStore(reducers, applyMiddleware(...middlewares));
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(

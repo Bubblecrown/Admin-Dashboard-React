@@ -1,18 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, FormikProps } from "formik";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Link,
-  Stack,
-  SxProps,
-  TextField,
-  Theme,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Button, Container, Grid, Link, Stack, SxProps, TextField, Theme, Typography } from "@mui/material";
 // icon
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 // end icon
@@ -33,7 +22,7 @@ type RegisterPageProps = {
 // 6.
 const RegisterPage: React.FC<any> = () => {
   const registerReducer = useSelector((state: RootReducer) => state.registerReducer);
-  const dispatch:any = useDispatch();
+  const dispatch: any = useDispatch();
   const navGate = useNavigate();
   const style: SxProps<Theme> | any = {
     container: { minWidth: 120, maxWidth: 400, display: "block" },
@@ -101,10 +90,9 @@ const RegisterPage: React.FC<any> = () => {
           // value update initial value
           value={props.values.password}
         />
-        <br />
-        <br />
         {/* disable double submit */}
         <Button
+          sx={{ mt: 4 }}
           type="submit"
           value="Submit"
           variant="contained"
@@ -115,7 +103,7 @@ const RegisterPage: React.FC<any> = () => {
           Sign up
         </Button>
         <Button
-          sx={{ mt: 1 }}
+          sx={{ mt: 2 }}
           fullWidth
           variant="outlined"
           onClick={() => {
@@ -133,7 +121,7 @@ const RegisterPage: React.FC<any> = () => {
   return (
     <div>
       <Container maxWidth="md">
-        <Grid container spacing={2}>
+        <Grid container>
           <Grid item xs={6} md={4}>
             <Box>dgbdvbg</Box>
           </Grid>
@@ -162,6 +150,11 @@ const RegisterPage: React.FC<any> = () => {
                 >
                   Log in
                 </Link>
+              </Box>
+              <Box sx={{ mt: 1, mb: 2 }}>
+                {registerReducer.isError && (
+                  <Alert severity="error">The registration failed. Maybe your username or password is invalid</Alert>
+                )}
               </Box>
               <Formik
                 onSubmit={async (value, { setSubmitting }) => {
