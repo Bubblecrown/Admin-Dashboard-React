@@ -158,7 +158,7 @@ const RegisterPage: React.FC<any> = () => {
               </Box>
               <Formik
                 onSubmit={async (value, { setSubmitting }) => {
-                  dispatch(registerAction.register(value));
+                  dispatch(registerAction.registerFunc(value, navGate));
                 }}
                 initialValues={initialUser}
               >
