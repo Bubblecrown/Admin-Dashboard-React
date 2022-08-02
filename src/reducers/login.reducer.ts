@@ -1,5 +1,5 @@
 // 3
-import { LOGIN_FAILED, LOGIN_FETCHING, LOGIN_SUCCESS } from "../Constants";
+import { LOGIN_FAILED, LOGIN_FETCHING, LOGIN_SUCCESS, USER_LOGOUT } from "../Constants";
 
 export interface loginState {
   isFetching: boolean;
@@ -21,6 +21,8 @@ export default (state = initialState, { type, payload }: any): loginState => {
       return { ...state, isFetching: false, isError: false, result: payload };
     case LOGIN_FAILED:
       return { ...state, isFetching: false, isError: true, result: null };
+    case USER_LOGOUT:
+      return initialState
     default:
       return state;
   }

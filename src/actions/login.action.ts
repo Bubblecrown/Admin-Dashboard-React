@@ -3,11 +3,12 @@
 // เปรียบ reducer เหมือนสมอง หากเกิด stste แบบนี้มากระทบควรจะแสดงความรู้สึกออกไปยังไง
 
 import { history } from "../index";
-import { LOGIN_FAILED, LOGIN_FETCHING, LOGIN_SUCCESS, OK, server, TOKEN } from "../Constants";
+import { LOGIN_FAILED, LOGIN_FETCHING, LOGIN_SUCCESS, OK, server, TOKEN, USER_LOGOUT } from "../Constants";
 import { Account } from "../types/account.type";
 import { httpClient } from "../utills/httpclient";
 import { loginResult } from "../types/authen.type";
 
+// action creator ตัวที่ใช้ปั้นส่งไปที่ reducer
 export const setFetchingLogin = () => ({
   type: LOGIN_FETCHING,
 });
@@ -17,6 +18,9 @@ export const setSuccessLogin = (payload: loginResult) => ({
 });
 export const setFailedLogin = () => ({
   type: LOGIN_FAILED,
+});
+export const setLogout = () => ({
+  type: USER_LOGOUT,
 });
 
 export const loginFunc = (account: Account, naviage: any) => {
@@ -50,9 +54,21 @@ export const restoreLogin = () => {
   return (dispatch: any) => {
     const token = localStorage.getItem(TOKEN);
     if (token) {
-      dispatch(setSuccessLogin({
-        result:OK, token, message:"Login Successfully"
-      }));
+      dispatch(
+        setSuccessLogin({
+          result: OK,
+          token,
+          message: "Login Successfully",
+        })
+      );
     }
+  };
+};
+
+export const logout = (navigate:any) => {
+  return (dispatch: any) => {
+    localStorage.removeItem(TOKEN);
+    dispatch(setLogout());
+    navigate("/login")
   };
 };

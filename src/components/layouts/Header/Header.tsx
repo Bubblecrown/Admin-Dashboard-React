@@ -9,6 +9,10 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
+// action
+import * as loginAction from '../../../actions/login.action'
+// end action
+
 // style
 import "./Header.css";
 // end style
@@ -29,6 +33,7 @@ import ListItemText from "@mui/material/ListItemText";
 
 import { Avatar, Badge, Menu, MenuItem, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -90,6 +95,7 @@ export default function Header({ open, setDrawerOpen }: HeaderProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const openA = Boolean(anchorEl);
   const navGate = useNavigate();
+  const dispatch:any = useDispatch()
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -136,14 +142,11 @@ export default function Header({ open, setDrawerOpen }: HeaderProps) {
           <IconButton size="large" edge="end" aria-label="account of current user" aria-haspopup="true" color="inherit">
             <React.Fragment>
               <Tooltip
-                title="Account settings"
-                onClick={handleClick}
-                aria-controls={openA ? "account-menu" : undefined}
+                title="Log out"
+                onClick={()=>{dispatch(loginAction.logout(navGate))}}
                 color="inherit"
-                aria-haspopup="true"
-                aria-expanded={openA ? "true" : undefined}
               >
-                <AccountCircleOutlinedIcon />
+                <Logout />
               </Tooltip>
 
               {/* drawer menu header */}
