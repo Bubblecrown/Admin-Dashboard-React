@@ -43,9 +43,7 @@ const columns: GridColDef[] = [
 // ];
 
 export default function DataTable() {
-  const productsReducer = useSelector((state: RootReducer) => 
-    state.productsReducer
-  );
+  const productsReducer = useSelector((state: RootReducer) => state.productsReducer);
   const dispatch: any = useDispatch();
 
   useEffect(() => {
@@ -53,12 +51,12 @@ export default function DataTable() {
   }, []);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 635, width: "100%" }}>
       <DataGrid
         rows={productsReducer.result}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
         checkboxSelection
       />
     </div>
