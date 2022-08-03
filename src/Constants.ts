@@ -15,6 +15,14 @@ export const LOGIN_FAILED = 'LOGIN_FAILED'
 export const USER_LOGOUT = 'USER_LOGOUT'
 // end Login page
 
+// Products page
+export const PRODUCTS_FETCHING = 'PRODUCTS_FETCHING'
+export const PRODUCTS_SUCCESS = 'PRODUCTS_SUCCESS'
+export const PRODUCTS_FAILED = 'PRODUCTS_FAILED'
+export const PRODUCTS_CLEAR = 'PRODUCTS_CLEAR'
+// end Products page
+
+
 export const apiUrl = "http://localhost:8085/api/v2";
 export const imageUrl = "http://localhost:8085";
 

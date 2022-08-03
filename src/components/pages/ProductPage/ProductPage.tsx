@@ -4,15 +4,27 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { imageUrl } from "../../../Constants";
 
+// action
+import * as productsAction from "../../../actions/products.action";
+import { useDispatch, useSelector } from "react-redux";
+import { RootReducer } from "../../../reducers";
+// end action
+
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "image", headerName: "IMAGE", width: 70, renderCell:(p:GridRenderCellParams<string>)=>{
-    return(
-    <img
-      src={`${imageUrl}/images/${p.value}?dummy=${Math.random()}`}
-      style={{ width: 70, height: 70, borderRadius: "5%" }}
-    />)
-  }},
+  {
+    field: "image",
+    headerName: "IMAGE",
+    width: 70,
+    renderCell: (p: GridRenderCellParams<string>) => {
+      return (
+        <img
+          src={`${imageUrl}/images/${p.value}?dummy=${Math.random()}`}
+          style={{ width: 70, height: 70, borderRadius: "5%" }}
+        />
+      );
+    },
+  },
   { field: "name", headerName: "NAME", width: 400 },
   { field: "price", headerName: "PRICE", width: 130 },
   { field: "stock", headerName: "AMOUNT", width: 130 },
@@ -31,16 +43,24 @@ const columns: GridColDef[] = [
 // ];
 
 export default function DataTable() {
-  const [rows, setRows] = useState([]);
+  const productsReducer = useSelector((state: RootReducer) => 
+    state.productsReducer
+  );
+  const dispatch: any = useDispatch();
+
   useEffect(() => {
-    const result = axios.get("http://localhost:8085/api/v2/stock/product").then((result) => {
-      setRows(result.data);
-    });
+    dispatch(productsAction.productsFunc());
   }, []);
 
   return (
     <div style={{ height: 400, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection />
+      <DataGrid
+        rows={productsReducer.result}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+      />
     </div>
   );
 }

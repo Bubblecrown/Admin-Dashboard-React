@@ -30,7 +30,7 @@ export const registerFunc = (account: Account, naviage: any) => {
       if (result.data.result === OK) {
         // success case
         setTimeout(() => {
-          dispatch(setSuccessRegister(result.data));
+          dispatch(setSuccessRegister(result.data.result));
           naviage("/login");
         }, 2000);
       } else {
