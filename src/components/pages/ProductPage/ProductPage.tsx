@@ -11,6 +11,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { imageUrl } from "../../../Constants";
 
+// style
+import "./ProductPage.css";
+// end style
+
 // icon
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -48,7 +52,7 @@ const columns: GridColDef[] = [
   {
     headerName: "Product Name",
     field: "name",
-    width: 400,
+    width: 300,
   },
   {
     headerName: "Amount",
@@ -131,7 +135,7 @@ function QuickSearchToolbar() {
         pb: 0.5,
       }}
     >
-      <Stack sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row", fontFamily: "Karla" }}>
+      <Stack sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
         <GridToolbarQuickFilter />
         <Button variant="contained" endIcon={<AddIcon />}>
           Create
