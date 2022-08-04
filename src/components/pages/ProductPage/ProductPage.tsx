@@ -31,6 +31,7 @@ import { Typography, Stack, IconButton, Box, Button } from "@mui/material";
 // Moment
 import Moment from "react-moment";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 // end Moment
 const columns: GridColDef[] = [
   {
@@ -133,10 +134,13 @@ function QuickSearchToolbar() {
       sx={{
         p: 2,
         pb: 0.5,
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "row",
       }}
     >
-      <Stack sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
-        <GridToolbarQuickFilter />
+      <GridToolbarQuickFilter />
+      <Stack component={Link} to="/products/create">
         <Button variant="contained" endIcon={<AddIcon />}>
           Create
         </Button>
