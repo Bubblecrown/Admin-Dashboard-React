@@ -4,43 +4,116 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { imageUrl } from "../../../Constants";
 
+// icon
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+// end icon
+
 // action
 import * as productsAction from "../../../actions/products.action";
 import { useDispatch, useSelector } from "react-redux";
 import { RootReducer } from "../../../reducers";
+import { Typography, Stack, IconButton } from "@mui/material";
 // end action
 
+// Moment
+import Moment from "react-moment";
+import NumberFormat from "react-number-format";
+// end Moment
 const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 70 },
   {
-    field: "image",
-    headerName: "IMAGE",
-    width: 70,
-    renderCell: (p: GridRenderCellParams<string>) => {
-      return (
-        <img
-          src={`${imageUrl}/images/${p.value}?dummy=${Math.random()}`}
-          style={{ width: 70, height: 70, borderRadius: "5%" }}
-        />
-      );
-    },
+    headerName: "Order No.",
+    field: "id",
+    width: 100,
   },
-  { field: "name", headerName: "NAME", width: 400 },
-  { field: "price", headerName: "PRICE", width: 130 },
-  { field: "stock", headerName: "AMOUNT", width: 130 },
+  {
+    headerName: "Image",
+    field: "image",
+    width: 80,
+    renderCell: ({ value }: GridRenderCellParams<string>) => (
+      <img
+        src={`${imageUrl}/images/${value}?dummy=${Math.random()}`}
+        style={{ width: 70, height: 70, borderRadius: "5%" }}
+      />
+    ),
+  },
+  {
+    headerName: "Product Name",
+    field: "name",
+    width: 400,
+  },
+  {
+    headerName: "Amount",
+    width: 120,
+    field: "stock",
+    renderCell: ({ value }: GridRenderCellParams<string>) => (
+      <Typography variant="body1">
+        <NumberFormat
+          value={value}
+          displayType={"text"}
+          thousandSeparator={true}
+          decimalScale={0}
+          fixedDecimalScale={true}
+        />
+      </Typography>
+    ),
+  },
+  {
+    headerName: "Price",
+    field: "price",
+    width: 120,
+    renderCell: ({ value }: GridRenderCellParams<string>) => (
+      <Typography variant="body1">
+        <NumberFormat
+          value={value}
+          displayType={"text"}
+          thousandSeparator={true}
+          decimalScale={2}
+          fixedDecimalScale={true}
+          prefix={"฿"}
+        />
+      </Typography>
+    ),
+  },
+  {
+    headerName: "Created At",
+    field: "createdAt",
+    width: 220,
+    renderCell: ({ value }: GridRenderCellParams<string>) => (
+      <Typography variant="body1">
+        <Moment format="DD/MM/YYYY HH:mm">{value}</Moment>
+      </Typography>
+    ),
+  },
+  {
+    headerName: "Action",
+    field: ".",
+    width: 120,
+    renderCell: ({ row }: GridRenderCellParams<string>) => (
+      <Stack direction="row">
+        <IconButton
+          aria-label="edit"
+          size="large"
+          onClick={() => {
+            // navigate("/stock/edit/" + row.id);
+          }}
+        >
+          <AppRegistrationIcon fontSize="inherit" />
+        </IconButton>
+        <IconButton
+          aria-label="delete"
+          size="large"
+          onClick={() => {
+            // setSelectedProduct(row);
+            // setOpenDialog(true);
+          }}
+        >
+          <DeleteOutlineIcon fontSize="inherit" />
+        </IconButton>
+      </Stack>
+    ),
+  },
 ];
-
-// const rows = [
-//   { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-//   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-//   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-//   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-//   { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-//   { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-//   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-//   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-//   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-// ];
 
 export default function DataTable() {
   const productsReducer = useSelector((state: RootReducer) => state.productsReducer);
