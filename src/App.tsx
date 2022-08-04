@@ -100,7 +100,10 @@ const editTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Josefin Sans",
+    fontFamily: [
+      "Josefin Sans",
+      "sans-serif",
+      "Karla"].join(',')
   },
   palette: {
     primary: {
@@ -148,16 +151,16 @@ export default function App() {
             {/* end public routes */}
 
             {/* protected routes */}
-            <Route path='/' element={<ProtectedRoutes/>}>
-            <Route path="/products" element={<ProductPage />} />
-            <Route path="/reports" element={<ReportPage />} />
-            <Route path="/products/create" element={<CreatePage />} />
-            <Route path="/product/edit/:id" element={<EditPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/" element={<Navigate to={"/login"} />} />
-            <Route path="*" element={<PageNotFound />} /></Route>
+            <Route path="/" element={<ProtectedRoutes />}>
+              <Route path="/products" element={<ProductPage />} />
+              <Route path="/reports" element={<ReportPage />} />
+              <Route path="/products/create" element={<CreatePage />} />
+              <Route path="/product/edit/:id" element={<EditPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/" element={<Navigate to={"/login"} />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Route>
             {/* end protected routes */}
-
           </Routes>
         </Main>
       </Box>

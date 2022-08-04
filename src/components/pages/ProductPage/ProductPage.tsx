@@ -1,5 +1,12 @@
 import * as React from "react";
-import { DataGrid, GridColDef, GridRenderCellParams, GridValueGetterParams } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+  GridCellParams,
+  GridToolbarQuickFilter,
+} from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { imageUrl } from "../../../Constants";
@@ -7,13 +14,14 @@ import { imageUrl } from "../../../Constants";
 // icon
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import AddIcon from "@mui/icons-material/Add";
 // end icon
 
 // action
 import * as productsAction from "../../../actions/products.action";
 import { useDispatch, useSelector } from "react-redux";
 import { RootReducer } from "../../../reducers";
-import { Typography, Stack, IconButton } from "@mui/material";
+import { Typography, Stack, IconButton, Box, Button } from "@mui/material";
 // end action
 
 // Moment
@@ -115,7 +123,25 @@ const columns: GridColDef[] = [
   },
 ];
 
-export default function DataTable() {
+function QuickSearchToolbar() {
+  return (
+    <Box
+      sx={{
+        p: 2,
+        pb: 0.5,
+      }}
+    >
+      <Stack sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row", fontFamily: "Karla" }}>
+        <GridToolbarQuickFilter />
+        <Button variant="contained" endIcon={<AddIcon />}>
+          Create
+        </Button>
+      </Stack>
+    </Box>
+  );
+}
+
+export default function productsPage() {
   const productsReducer = useSelector((state: RootReducer) => state.productsReducer);
   const dispatch: any = useDispatch();
 
@@ -124,14 +150,16 @@ export default function DataTable() {
   }, []);
 
   return (
-    <div style={{ height: 635, width: "100%" }}>
+    <Box>
       <DataGrid
+        sx={{ height: "85vh", width: "100%" }}
         rows={productsReducer.result}
         columns={columns}
+        components={{ Toolbar: QuickSearchToolbar }}
         pageSize={10}
         rowsPerPageOptions={[10]}
         checkboxSelection
       />
-    </div>
+    </Box>
   );
 }
