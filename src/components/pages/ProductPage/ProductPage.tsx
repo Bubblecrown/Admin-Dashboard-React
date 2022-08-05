@@ -130,9 +130,11 @@ const columns: GridColDef[] = [
 
 interface QuickSearchToolbarProps {
   clearSearch: () => void;
+  onChange: () => void;
+  value: string;
 }
 
-function QuickSearchToolbar(props:QuickSearchToolbarProps) {
+function QuickSearchToolbar(props: QuickSearchToolbarProps) {
   return (
     <Box
       sx={{
@@ -143,12 +145,7 @@ function QuickSearchToolbar(props:QuickSearchToolbarProps) {
         flexDirection: "row",
       }}
     >
-      <GridToolbarQuickFilter>
-        <IconButton
-        onClick={props.clearSearch}>
-          <ClearIcon />
-        </IconButton>
-      </GridToolbarQuickFilter>
+      <GridToolbarQuickFilter />
       <Stack component={Link} to="/products/create">
         <Button variant="contained" endIcon={<AddIcon />}>
           Create
