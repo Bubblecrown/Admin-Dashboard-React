@@ -6,11 +6,10 @@ import {
   GridValueGetterParams,
   GridCellParams,
   GridToolbarQuickFilter,
+  GridLinkOperator,
 } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { imageUrl } from "../../../Constants";
-
 // style
 import "./ProductPage.css";
 // end style
@@ -19,6 +18,7 @@ import "./ProductPage.css";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
 // end icon
 
 // action
@@ -128,7 +128,11 @@ const columns: GridColDef[] = [
   },
 ];
 
-function QuickSearchToolbar() {
+interface QuickSearchToolbarProps {
+  clearSearch: () => void;
+}
+
+function QuickSearchToolbar(props:QuickSearchToolbarProps) {
   return (
     <Box
       sx={{
@@ -139,7 +143,12 @@ function QuickSearchToolbar() {
         flexDirection: "row",
       }}
     >
-      <GridToolbarQuickFilter />
+      <GridToolbarQuickFilter>
+        <IconButton
+        onClick={props.clearSearch}>
+          <ClearIcon />
+        </IconButton>
+      </GridToolbarQuickFilter>
       <Stack component={Link} to="/products/create">
         <Button variant="contained" endIcon={<AddIcon />}>
           Create
@@ -149,7 +158,7 @@ function QuickSearchToolbar() {
   );
 }
 
-export default function productsPage() {
+export default function ProductsPage() {
   const productsReducer = useSelector((state: RootReducer) => state.productsReducer);
   const dispatch: any = useDispatch();
 
